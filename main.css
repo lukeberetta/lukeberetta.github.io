@@ -322,9 +322,9 @@ a {
 
 .app-main li,
 .app-main p {
-  opacity: .6;
+  opacity: .7;
   font-size: 18px;
-  max-width: 420px;
+  max-width: 450px;
   list-style: none;
   line-height: 150%;
   padding-bottom: 20px

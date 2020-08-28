@@ -1,4 +1,3 @@
-
 function getRandomInt(e, n) {
 	return Math.floor(Math.random() * (n - e + 1)) + e
 }
@@ -38,4 +37,5 @@ $(window).on("load", function () {
 var classes = ["is-black", "is-white"],
 	randomClass = classes[getRandomInt(0, classes.length - 1)];
 
-document.body.className = randomClass;
+// document.body.className = randomClass;
+document.body.className = "is-black";
