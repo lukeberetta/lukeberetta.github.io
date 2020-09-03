@@ -117,6 +117,15 @@ section {
   -webkit-tap-highlight-color: transparent
 }
 
+@font-face{
+  font-family: 'DrukWide';
+  src: url(assets/fonts/DrukWide-Medium.ttf);
+}
+@font-face{
+  font-family: 'HKGrotesk-Medium';
+  src: url(assets/fonts/HKGrotesk-Medium.otf);
+}
+
 .app-aside,
 .app-header {
   z-index: 99;
@@ -127,22 +136,22 @@ section {
 
 body {
   line-height: 1;
-  font-weight: 400;
+  font-weight: 300;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'DM Sans', Arial, Helvetica, sans-serif;
-
+  font-family: 'HKGrotesk-Medium', Arial, Helvetica, sans-serif;
 }
 
 .app-aside ul li,
 .app-header,
-.app-main span {
-  font-weight: 500;
-  font-size: 16px;
+.app-main span, h2 {
+  /* font-weight: 500; */
+  font-size: 14px;
+  font-family: 'DrukWide';
 }
 
 a {
@@ -308,8 +317,7 @@ a {
 }
 
 .app-main h2 {
-  font-weight: 500;
-  font-size: 60px;
+  font-size: 50px;
   max-width: 960px;
   line-height: 125%
 }
@@ -322,7 +330,7 @@ a {
 
 .app-main li,
 .app-main p {
-  opacity: .7;
+  opacity: .75;
   font-size: 18px;
   max-width: 450px;
   list-style: none;
