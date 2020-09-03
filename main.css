@@ -196,9 +196,9 @@ a {
 
 @media only screen and (max-width: 451px) {
   .app-header {
-    top: 130px;
+    top: 160px;
     left: auto;
-    right: 35px;
+    right: 28px;
     transform: rotate(90deg);
     transform-origin: top right
   }
@@ -242,7 +242,7 @@ a {
 @media only screen and (max-width: 451px) {
   .app-aside {
     left: auto;
-    right: 35px;
+    right: 28px;
     bottom: 30px;
     transform: rotate(90deg);
     transform-origin: top right
@@ -277,7 +277,7 @@ a {
 
 @media only screen and (max-width: 451px) {
   .app-main {
-    padding: 60px 60px 60px 30px
+    padding: 60px 68px 60px 24px
   }
 }
 
