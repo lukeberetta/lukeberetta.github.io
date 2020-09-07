@@ -149,7 +149,6 @@ body {
 .app-aside ul li,
 .app-header,
 .app-main span, h2 {
-  /* font-weight: 500; */
   font-size: 14px;
   font-family: 'DrukWide';
 }
@@ -330,11 +329,11 @@ a {
 
 .app-main li,
 .app-main p {
-  opacity: .75;
+  opacity: .7;
   font-size: 18px;
   max-width: 450px;
   list-style: none;
-  line-height: 150%;
+  line-height: 124%;
   padding-bottom: 20px
 }
 
@@ -376,4 +375,19 @@ a {
   100% {
     opacity: 1;
   }
+}
+
+/* Future ref */
+
+#gradient {
+  background: radial-gradient(45.33% 24.44% at 48.53% 52.83%, #c0ceff00 0%, rgb(35 29 70 / 0%) 100%), radial-gradient(81.14% 65.25% at 108% 74.14%, #00ffe75c 0%, rgb(171 171 171 / 10%) 100%), radial-gradient(81.86% 41.75% at 2% 71.61%, #d8ffc8 0%, rgb(255 234 186) 100%), radial-gradient(34.48% 62.34% at 21.35% 32.43%, #c0ffc5 0%, #e2e0a6 100%);
+  background-blend-mode: multiply, difference, difference, multiply, multiply;
+  mix-blend-mode: multiply;
+  opacity: 0.4;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }

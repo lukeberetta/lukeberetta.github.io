@@ -1,6 +1,6 @@
-function getRandomInt(e, n) {
-	return Math.floor(Math.random() * (n - e + 1)) + e
-}
+// function getRandomInt(e, n) {
+// 	return Math.floor(Math.random() * (n - e + 1)) + e
+// }
 
 function appScroller() {
 	function e() {
@@ -34,8 +34,8 @@ $(window).on("load", function () {
 		/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? $("body").addClass("is-mobile") : appScroller()
 });
 
-var classes = ["is-black", "is-white"],
-	randomClass = classes[getRandomInt(0, classes.length - 1)];
+// var classes = ["is-black", "is-white"],
+// 	randomClass = classes[getRandomInt(0, classes.length - 1)];
 
 // document.body.className = randomClass;
-document.body.className = "is-black";
+// document.body.className = "is-black";
