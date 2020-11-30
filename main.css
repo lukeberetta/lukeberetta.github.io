@@ -1,8 +1,7 @@
 :root {
-  --colour-light: #f6f5f1;
-  --colour-dark: #1f1f1f;
+  --colour-light: #f0f9e6;
+  --colour-dark: #201e21;
 }
-
 
 a,
 abbr,
@@ -89,7 +88,7 @@ video {
   padding: 0;
   border: 0;
   font: inherit;
-  vertical-align: baseline
+  vertical-align: baseline;
 }
 
 article,
@@ -103,7 +102,7 @@ hgroup,
 menu,
 nav,
 section {
-  display: block
+  display: block;
 }
 
 * {
@@ -114,15 +113,15 @@ section {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-tap-highlight-color: transparent
+  -webkit-tap-highlight-color: transparent;
 }
 
-@font-face{
-  font-family: 'DrukWide';
+@font-face {
+  font-family: "DrukWide";
   src: url(assets/fonts/DrukWide-Medium.ttf);
 }
-@font-face{
-  font-family: 'HKGrotesk-Medium';
+@font-face {
+  font-family: "HKGrotesk-Medium";
   src: url(assets/fonts/HKGrotesk-Medium.otf);
 }
 
@@ -143,22 +142,23 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'HKGrotesk-Medium', Arial, Helvetica, sans-serif;
+  font-family: "HKGrotesk-Medium", Arial, Helvetica, sans-serif;
 }
 
 .app-aside ul li,
 .app-header,
-.app-main span, h2 {
+.app-main span,
+h2 {
   font-size: 14px;
-  font-family: 'DrukWide';
+  font-family: "DrukWide";
 }
 
 a {
-  text-decoration: none
+  text-decoration: none;
 }
 
 .is-loading {
-  cursor: wait
+  cursor: wait;
 }
 
 .is-white,
@@ -190,7 +190,7 @@ a {
   top: 150px;
   left: 65px;
   transform: rotate(-90deg);
-  transform-origin: bottom left
+  transform-origin: bottom left;
 }
 
 @media only screen and (max-width: 451px) {
@@ -199,7 +199,7 @@ a {
     left: auto;
     right: 28px;
     transform: rotate(90deg);
-    transform-origin: top right
+    transform-origin: top right;
   }
 }
 
@@ -207,17 +207,17 @@ a {
   left: 65px;
   bottom: 60px;
   transform: rotate(-90deg);
-  transform-origin: bottom left
+  transform-origin: bottom left;
 }
 
 .app-aside ul {
-  list-style: none
+  list-style: none;
 }
 
 .app-aside ul li {
   float: left;
   position: relative;
-  margin-right: 30px
+  margin-right: 30px;
 }
 
 .app-aside ul li:before {
@@ -227,15 +227,15 @@ a {
   height: 1px;
   transform: scaleX(0);
   transform-origin: right;
-  transition: transform .2s ease-out;
+  transition: transform 0.2s ease-out;
   position: absolute;
   bottom: -1px;
-  left: 0
+  left: 0;
 }
 
 .app-aside ul li:hover:before {
   transform: scaleX(1);
-  transform-origin: left
+  transform-origin: left;
 }
 
 @media only screen and (max-width: 451px) {
@@ -244,24 +244,24 @@ a {
     right: 28px;
     bottom: 30px;
     transform: rotate(90deg);
-    transform-origin: top right
+    transform-origin: top right;
   }
 
   .app-aside ul li {
     font-size: 9px;
     margin-right: 0;
-    margin-left: 30px
+    margin-left: 30px;
   }
 }
 
 .is-mobile .app-main {
-  position: relative
+  position: relative;
 }
 
 .app-main {
   position: fixed;
   padding: 240px 120px;
-  transition: all .5s cubic-bezier(.2, .84, .5, 1);
+  transition: all 0.5s cubic-bezier(0.2, 0.84, 0.5, 1);
   transform-origin: 0 0;
   transform: translate3d(0, 0, 0);
   -webkit-backface-visibility: hidden;
@@ -271,12 +271,12 @@ a {
   -webkit-perspective: 1000;
   -moz-perspective: 1000;
   -ms-perspective: 1000;
-  perspective: 1000
+  perspective: 1000;
 }
 
 @media only screen and (max-width: 451px) {
   .app-main {
-    padding: 60px 68px 60px 24px
+    padding: 60px 68px 60px 24px;
   }
 }
 
@@ -284,68 +284,67 @@ a {
 .app-main .main-section {
   display: block;
   position: relative;
-  padding-bottom: 120px
+  padding-bottom: 120px;
 }
 
 @media only screen and (max-width: 451px) {
-
   .app-main .main-intro,
   .app-main .main-section {
-    padding-bottom: 60px
+    padding-bottom: 60px;
   }
 }
 
 .app-main .main-intro:last-of-type,
 .app-main .main-section:last-of-type {
-  padding-bottom: 0
+  padding-bottom: 0;
 }
 
 .app-main .main-section {
-  padding-bottom: 120px
+  padding-bottom: 120px;
 }
 
 @media only screen and (max-width: 451px) {
   .app-main .main-section {
-    padding-bottom: 60px
+    padding-bottom: 60px;
   }
 }
 
 .app-main span {
   display: block;
-  padding-bottom: 30px
+  padding-bottom: 30px;
 }
 
 .app-main h2 {
   font-size: 50px;
   max-width: 960px;
-  line-height: 125%
+  line-height: 125%;
 }
 
 @media only screen and (max-width: 451px) {
   .app-main h2 {
-    font-size: 35px
+    font-size: 35px;
   }
 }
 
 .app-main li,
 .app-main p {
-  opacity: .7;
+  opacity: 0.7;
   font-size: 18px;
   max-width: 450px;
   list-style: none;
   line-height: 124%;
-  padding-bottom: 20px
+  padding-bottom: 20px;
 }
 
 .app-main li small,
 .app-main p small {
-  font-size: 11px
+  font-size: 11px;
 }
 
 .app-main li,
 .app-main li:last-of-type,
 .app-main p:last-of-type {
-  padding-bottom: 0
+  padding-bottom: 0;
 }
 
 .highlight {
@@ -357,12 +356,12 @@ a {
 
 .fadein-1 {
   opacity: 0;
-  animation: .8s fadein-1 0.3s forwards;
+  animation: 0.8s fadein-1 0.3s forwards;
 }
 
 .fadein-2 {
   opacity: 0;
-  animation: .8s fadein-2 .6s forwards;
+  animation: 0.8s fadein-2 0.6s forwards;
 }
 
 @keyframes fadein-1 {
@@ -380,7 +379,22 @@ a {
 /* Future ref */
 
 #gradient {
-  background: radial-gradient(45.33% 24.44% at 48.53% 52.83%, #c0ceff00 0%, rgb(35 29 70 / 0%) 100%), radial-gradient(81.14% 65.25% at 108% 74.14%, #00ffe75c 0%, rgb(171 171 171 / 10%) 100%), radial-gradient(81.86% 41.75% at 2% 71.61%, #d8ffc8 0%, rgb(255 234 186) 100%), radial-gradient(34.48% 62.34% at 21.35% 32.43%, #c0ffc5 0%, #e2e0a6 100%);
+  background: radial-gradient(
+      45.33% 24.44% at 48.53% 52.83%,
+      #c0ceff00 0%,
+      rgb(35 29 70 / 0%) 100%
+    ),
+    radial-gradient(
+      81.14% 65.25% at 108% 74.14%,
+      #00ffe75c 0%,
+      rgb(171 171 171 / 10%) 100%
+    ),
+    radial-gradient(
+      81.86% 41.75% at 2% 71.61%,
+      #d8ffc8 0%,
+      rgb(255 234 186) 100%
+    ),
+    radial-gradient(34.48% 62.34% at 21.35% 32.43%, #c0ffc5 0%, #e2e0a6 100%);
   background-blend-mode: multiply, difference, difference, multiply, multiply;
   mix-blend-mode: multiply;
   opacity: 0.4;
