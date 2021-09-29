@@ -1,6 +1,6 @@
-# My Portfolio Page
+# My personal website. 
 
-Coded by yours truly. 
+Please and thank you ✌️ 
 
 [Visit website.](https://lukeberetta.github.io)
 
