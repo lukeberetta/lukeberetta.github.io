@@ -121,8 +121,8 @@ section {
   src: url(assets/fonts/DrukWide-Medium.ttf);
 }
 @font-face {
-  font-family: "HKGrotesk-Medium";
-  src: url(assets/fonts/HKGrotesk-Medium.otf);
+  font-family: "PolySans-Neutral";
+  src: url(assets/fonts/PolySans-Neutral.otf);
 }
 
 .app-aside,
@@ -142,7 +142,7 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: "HKGrotesk-Medium", Arial, Helvetica, sans-serif;
+  font-family: "PolySans-Neutral", Arial, Helvetica, sans-serif;
 }
 
 .app-aside ul li,
@@ -315,9 +315,9 @@ a {
 }
 
 .app-main h2 {
-  font-size: 50px;
+  font-size: 60px;
   max-width: 960px;
-  line-height: 125%;
+  line-height: 110%;
 }
 
 @media only screen and (max-width: 451px) {
@@ -328,7 +328,7 @@ a {
 
 .app-main li,
 .app-main p {
-  opacity: 0.7;
+  opacity: 0.85;
   font-size: 18px;
   max-width: 450px;
   list-style: none;
