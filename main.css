@@ -3,6 +3,10 @@
   --colour-dark: #181818;
 }
 
+a {
+  cursor: url("assets/cursor.png"), auto;
+}
+
 a,
 abbr,
 acronym,
