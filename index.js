@@ -1,41 +1,47 @@
-// function getRandomInt(e, n) {
-// 	return Math.floor(Math.random() * (n - e + 1)) + e
-// }
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector(".app-main");
+  if (!main) return;
 
-function appScroller() {
-	function e() {
-		if (n == window.pageYOffset)
-			return o(e),
-				!1;
-		var a = "translate3d(0px, -" + (n = window.pageYOffset) + "px, 0px)"
-			, i = $(".app-main")[0];
-		i.style.webkitTransform = a,
-			i.style.mozTransform = a,
-			i.style.transform = a,
-			o(e)
-	}
-	var n = -100;
-	$(document).ready(function () {
-		$("body").height($(".app-main").outerHeight()),
-			$(window).resize(function () {
-				$("body").height($(".app-main").outerHeight())
-			})
-	});
-	var o = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.msRequestAnimationFrame || window.oRequestAnimationFrame || function (e) {
-		window.setTimeout(e, 1e3 / 60)
-	};
-	e()
-}
+  // Only enable on desktops/laptops (fine pointer & hover).
+  const desktopLike = window.matchMedia(
+    "(hover: hover) and (pointer: fine)"
+  ).matches;
+  if (!desktopLike) {
+    document.body.classList.add("is-mobile");
+    return; // Use native scroll on mobile
+  }
 
-var $ = jQuery.noConflict();
+  document.body.classList.remove("is-loading");
 
-$(window).on("load", function () {
-	$("body").removeClass("is-loading"),
-		/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? $("body").addClass("is-mobile") : appScroller()
+  const raf = (cb) =>
+    (window.requestAnimationFrame || ((fn) => setTimeout(fn, 1000 / 60)))(cb);
+  let lastY = -1,
+    rafId = null;
+
+  const setBodyHeight = () => {
+    document.body.style.height = `${main.scrollHeight}px`;
+  };
+
+  const ro = new ResizeObserver(setBodyHeight);
+  ro.observe(main);
+  window.addEventListener("resize", setBodyHeight);
+
+  const tick = () => {
+    const y = window.pageYOffset || document.documentElement.scrollTop || 0;
+    if (y !== lastY) {
+      lastY = y;
+      const t = `translate3d(0, -${y}px, 0)`;
+      main.style.transform = t;
+    }
+    rafId = raf(tick);
+  };
+
+  setBodyHeight();
+  tick();
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      if (rafId) cancelAnimationFrame(rafId);
+    } else tick();
+  });
 });
-
-// var classes = ["is-black", "is-white"],
-// 	randomClass = classes[getRandomInt(0, classes.length - 1)];
-
-// document.body.className = randomClass;
-// document.body.className = "is-black";
