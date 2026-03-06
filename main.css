@@ -3,113 +3,13 @@
   --colour-dark: #181818;
 }
 
-a,
-abbr,
-acronym,
-address,
-applet,
-article,
-aside,
-audio,
-b,
-big,
-blockquote,
-body,
-canvas,
-caption,
-center,
-cite,
-code,
-dd,
-del,
-details,
-dfn,
-div,
-dl,
-dt,
-em,
-embed,
-fieldset,
-figcaption,
-figure,
-footer,
-form,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-header,
-hgroup,
-html,
-i,
-iframe,
-img,
-ins,
-kbd,
-label,
-legend,
-li,
-mark,
-menu,
-nav,
-object,
-ol,
-output,
-p,
-pre,
-q,
-ruby,
-s,
-samp,
-section,
-small,
-span,
-strike,
-strong,
-sub,
-summary,
-sup,
-table,
-tbody,
-td,
-tfoot,
-th,
-thead,
-time,
-tr,
-tt,
-u,
-ul,
-var,
-video {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
-  border: 0;
-  font: inherit;
-  vertical-align: baseline;
-}
-
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  font: inherit;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -128,7 +28,6 @@ section {
 .app-aside,
 .app-header {
   z-index: 99;
-  margin: auto;
   position: fixed;
   white-space: nowrap;
 }
@@ -138,9 +37,6 @@ body {
   font-weight: 300;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   font-family: "PolySans-Neutral", Arial, Helvetica, sans-serif;
 }
@@ -157,32 +53,16 @@ a {
   text-decoration: none;
 }
 
-.is-loading {
-  cursor: wait;
-}
-
-.is-white,
-.is-white .app-intro h1,
-.is-white a {
-  color: var(--colour-dark);
-}
-
-.is-white {
-  background: var(--colour-light);
-}
-
-.is-black,
-.is-white .app-aside ul li:before {
+.is-black {
   background: var(--colour-dark);
 }
 
 .is-black,
-.is-black .app-intro h1,
 .is-black a {
   color: var(--colour-light);
 }
 
-.is-black .app-aside ul li:before {
+.is-black .app-aside ul li::before {
   background: var(--colour-light);
 }
 
@@ -193,7 +73,7 @@ a {
   transform-origin: bottom left;
 }
 
-@media only screen and (max-width: 451px) {
+@media (max-width: 451px) {
   .app-header {
     top: 160px;
     left: auto;
@@ -211,16 +91,16 @@ a {
 }
 
 .app-aside ul {
+  display: flex;
   list-style: none;
+  gap: 30px;
 }
 
 .app-aside ul li {
-  float: left;
   position: relative;
-  margin-right: 30px;
 }
 
-.app-aside ul li:before {
+.app-aside ul li::before {
   z-index: -1;
   content: "";
   width: 100%;
@@ -233,12 +113,12 @@ a {
   left: 0;
 }
 
-.app-aside ul li:hover:before {
+.app-aside ul li:hover::before {
   transform: scaleX(1);
   transform-origin: left;
 }
 
-@media only screen and (max-width: 451px) {
+@media (max-width: 451px) {
   .app-aside {
     left: auto;
     right: 28px;
@@ -249,8 +129,6 @@ a {
 
   .app-aside ul li {
     font-size: 9px;
-    margin-right: 0;
-    margin-left: 30px;
   }
 }
 
@@ -265,16 +143,11 @@ a {
   transform-origin: 0 0;
   transform: translate3d(0, 0, 0);
   -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
   backface-visibility: hidden;
-  -webkit-perspective: 1000;
-  -moz-perspective: 1000;
-  -ms-perspective: 1000;
-  perspective: 1000;
+  perspective: 1000px;
 }
 
-@media only screen and (max-width: 451px) {
+@media (max-width: 451px) {
   .app-main {
     padding: 60px 68px 60px 24px;
   }
@@ -282,12 +155,11 @@ a {
 
 .app-main .main-intro,
 .app-main .main-section {
-  display: block;
   position: relative;
   padding-bottom: 120px;
 }
 
-@media only screen and (max-width: 451px) {
+@media (max-width: 451px) {
   .app-main .main-intro,
   .app-main .main-section {
     padding-bottom: 60px;
@@ -297,16 +169,6 @@ a {
 .app-main .main-intro:last-of-type,
 .app-main .main-section:last-of-type {
   padding-bottom: 0;
-}
-
-.app-main .main-section {
-  padding-bottom: 120px;
-}
-
-@media only screen and (max-width: 451px) {
-  .app-main .main-section {
-    padding-bottom: 60px;
-  }
 }
 
 .app-main span {
@@ -320,7 +182,7 @@ a {
   line-height: 110%;
 }
 
-@media only screen and (max-width: 451px) {
+@media (max-width: 451px) {
   .app-main h2 {
     font-size: 35px;
   }
@@ -341,15 +203,9 @@ a {
   font-size: 11px;
 }
 
-.app-main li,
 .app-main li:last-of-type,
 .app-main p:last-of-type {
   padding-bottom: 0;
-}
-
-.highlight {
-  opacity: 1 !important;
-  text-decoration: underline;
 }
 
 /* Animation */
@@ -359,18 +215,14 @@ a {
 }
 
 .fadein-1 {
-  animation: 0.8s fadein-1 0.3s forwards;
-}
-.fadein-2 {
-  animation: 0.8s fadein-2 0.6s forwards;
+  animation: fadein 0.8s 0.3s forwards;
 }
 
-@keyframes fadein-1 {
-  to {
-    opacity: 1;
-  }
+.fadein-2 {
+  animation: fadein 0.8s 0.6s forwards;
 }
-@keyframes fadein-2 {
+
+@keyframes fadein {
   to {
     opacity: 1;
   }

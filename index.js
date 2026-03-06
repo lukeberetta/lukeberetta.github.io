@@ -2,21 +2,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const main = document.querySelector(".app-main");
   if (!main) return;
 
-  // Only enable on desktops/laptops (fine pointer & hover).
-  const desktopLike = window.matchMedia(
-    "(hover: hover) and (pointer: fine)"
-  ).matches;
-  if (!desktopLike) {
+  const isDesktop = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (!isDesktop) {
     document.body.classList.add("is-mobile");
-    return; // Use native scroll on mobile
+    return;
   }
 
-  document.body.classList.remove("is-loading");
-
-  const raf = (cb) =>
-    (window.requestAnimationFrame || ((fn) => setTimeout(fn, 1000 / 60)))(cb);
-  let lastY = -1,
-    rafId = null;
+  let lastY = -1;
+  let rafId = null;
 
   const setBodyHeight = () => {
     document.body.style.height = `${main.scrollHeight}px`;
@@ -27,13 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", setBodyHeight);
 
   const tick = () => {
-    const y = window.pageYOffset || document.documentElement.scrollTop || 0;
+    const y = window.scrollY;
     if (y !== lastY) {
       lastY = y;
-      const t = `translate3d(0, -${y}px, 0)`;
-      main.style.transform = t;
+      main.style.transform = `translate3d(0, -${y}px, 0)`;
     }
-    rafId = raf(tick);
+    rafId = requestAnimationFrame(tick);
   };
 
   setBodyHeight();
@@ -41,7 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
-      if (rafId) cancelAnimationFrame(rafId);
-    } else tick();
+      cancelAnimationFrame(rafId);
+    } else {
+      tick();
+    }
   });
 });
