@@ -20,6 +20,7 @@
   font-family: "DrukWide";
   src: url(assets/fonts/DrukWide-Medium.ttf);
 }
+
 @font-face {
   font-family: "PolySans-Neutral";
   src: url(assets/fonts/PolySans-Neutral.otf);
@@ -160,6 +161,7 @@ a {
 }
 
 @media (max-width: 451px) {
+
   .app-main .main-intro,
   .app-main .main-section {
     padding-bottom: 60px;
@@ -208,9 +210,72 @@ a {
   padding-bottom: 0;
 }
 
+/* Projects */
+.projects {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.project-card {
+  display: inline-block;
+  width: 320px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: opacity 0.2s ease-out;
+}
+
+.project-card:hover {
+  opacity: 0.75;
+}
+
+.project-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.project-thumb--placeholder {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.project-card--wip {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.project-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease-out;
+}
+
+.project-card:hover .project-thumb img {
+  transform: scale(1.04);
+}
+
+.project-card .project-name {
+  font-family: "DrukWide";
+  font-size: 14px;
+  opacity: 1;
+  max-width: none;
+  padding: 18px 20px 8px;
+}
+
+.project-card .project-desc {
+  font-size: 14px;
+  opacity: 0.5;
+  max-width: none;
+  padding: 0 20px 20px !important;
+}
+
 /* Animation */
 .fadein-1,
-.fadein-2 {
+.fadein-2,
+.fadein-3 {
   opacity: 0;
 }
 
@@ -220,6 +285,10 @@ a {
 
 .fadein-2 {
   animation: fadein 0.8s 0.6s forwards;
+}
+
+.fadein-3 {
+  animation: fadein 0.8s 0.9s forwards;
 }
 
 @keyframes fadein {
