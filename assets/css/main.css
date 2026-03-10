@@ -16,6 +16,16 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+::-moz-selection {
+  color: var(--colour-dark);
+  background: var(--colour-light);
+}
+
+::selection {
+  color: var(--colour-dark);
+  background: var(--colour-light);
+}
+
 @font-face {
   font-family: "DrukWide";
   src: url(../fonts/DrukWide-Medium.ttf);
