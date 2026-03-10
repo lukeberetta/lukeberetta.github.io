@@ -257,6 +257,22 @@ a {
   transform: scale(1.04);
 }
 
+.project-thumb--figma {
+  position: relative;
+}
+
+.project-thumb--figma iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 800px;
+  height: 450px;
+  transform: scale(0.4);
+  transform-origin: top left;
+  pointer-events: none;
+  border: none;
+}
+
 .project-card .project-name {
   font-family: "DrukWide";
   font-size: 14px;
