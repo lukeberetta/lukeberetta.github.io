@@ -165,6 +165,48 @@ a {
 .app-main .main-section {
   position: relative;
   padding-bottom: 120px;
+  max-width: 680px;
+}
+
+.back-link {
+  display: inline-block;
+  font-size: 14px;
+  opacity: 0.5;
+  margin-bottom: 20px;
+  transition: opacity 0.2s ease-out;
+}
+
+.back-link:hover {
+  opacity: 1;
+}
+
+.img-placeholder {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border-radius: 10px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 4px 20px rgba(0, 0, 0, 0.5);
+  margin: 32px 0;
+}
+
+.img-placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.06) 35%,
+    transparent 55%
+  );
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  pointer-events: none;
 }
 
 @media (max-width: 451px) {
@@ -187,7 +229,7 @@ a {
 
 .app-main h2 {
   font-size: 60px;
-  max-width: 960px;
+  max-width: none;
   line-height: 110%;
 }
 
@@ -201,7 +243,7 @@ a {
 .app-main p {
   opacity: 0.85;
   font-size: 18px;
-  max-width: 450px;
+  max-width: none;
   list-style: none;
   line-height: 124%;
   padding-bottom: 20px;
@@ -209,7 +251,7 @@ a {
 
 .app-main li small,
 .app-main p small {
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .app-main li:last-of-type,
@@ -219,27 +261,64 @@ a {
 
 /* Projects */
 .projects {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px 24px;
+  max-width: 560px;
 }
 
 .project-card {
-  display: inline-block;
-  width: 320px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 14px;
-  overflow: hidden;
-  transition: opacity 0.2s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: auto;
+  background: none;
+  border-radius: 0;
+  overflow: visible;
+  transition: transform 0.18s ease-out, opacity 0.18s ease-out;
 }
 
 .project-card:hover {
-  opacity: 0.75;
+  transform: scale(1.06);
+  opacity: 1;
+}
+
+.project-icon {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 27px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 4px 20px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.project-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.06) 35%,
+    transparent 55%
+  );
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .project-thumb {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 100%;
+  aspect-ratio: unset;
   overflow: hidden;
 }
 
@@ -256,28 +335,64 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
   display: block;
-  transition: transform 0.3s ease-out;
+  transition: none;
 }
 
 .project-card:hover .project-thumb img {
-  transform: scale(1.04);
+  transform: none;
 }
 
+.project-card--folder {
+  gap: 4px;
+}
+
+.project-folder-icon {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 451px) {
+  .project-folder-icon {
+    width: 80px;
+    height: 80px;
+  }
+}
 
 .project-card .project-name {
-  font-family: "DrukWide";
-  font-size: 14px;
-  opacity: 1;
+  font-family: "PolySans-Neutral";
+  font-size: 13px;
+  opacity: 0.9;
   max-width: none;
-  padding: 18px 20px 8px;
+  padding: 0;
+  text-align: center;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
 }
 
 .project-card .project-desc {
-  font-size: 14px;
-  opacity: 0.5;
-  max-width: none;
-  padding: 0 20px 20px !important;
+  display: none;
+}
+
+@media (max-width: 451px) {
+  .projects {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px 12px;
+    max-width: 100%;
+  }
+
+  .project-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 18px;
+  }
+
+  .project-card .project-name {
+    font-size: 10px;
+  }
 }
 
 /* Animation */
