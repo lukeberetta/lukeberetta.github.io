@@ -305,9 +305,18 @@ h2 {
   object-fit: cover;
 }
 
+.main-section .img-placeholder:last-child {
+  margin-top: 120px;
+  margin-bottom: 0;
+}
+
 @media (max-width: 451px) {
   .img-placeholder.img-full {
     width: calc(100vw - 92px);
+  }
+
+  .main-section .img-placeholder:last-child {
+    margin-top: 60px;
   }
 }
 
