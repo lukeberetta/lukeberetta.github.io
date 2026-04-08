@@ -7,8 +7,8 @@
   document.body.appendChild(blob);
   document.body.classList.add("cursor-active");
 
-  blob.style.marginLeft = "-10px";
-  blob.style.marginTop  = "-10px";
+  blob.style.marginLeft = "-20px";
+  blob.style.marginTop  = "-20px";
 
   // ── State ─────────────────────────────────────────────────
   let mx = -100, my = -100;
@@ -156,7 +156,7 @@
     }
 
     // ── WRITE PHASE (all DOM writes at end) ───────────────
-    blob.style.transform = `translate(${bx}px, ${by}px) rotate(${angle}rad) scale(${sx}, ${sy})`;
+    blob.style.transform = `translate(${bx}px, ${by}px) rotate(${angle}rad) scale(${sx * 0.5}, ${sy * 0.5})`;
 
     for (const t of magTargets) {
       t.el.style.transform = `translate(${t.x}px, ${t.y}px) scale(${t.scale})`;
