@@ -274,15 +274,49 @@ h2 {
    ============================================================ */
 
 .back-link {
-  display: inline-block;
-  font-size: 14px;
-  opacity: 0.5;
-  margin-bottom: 20px;
-  transition: opacity 0.2s ease-out;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  /* box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 4px 20px rgba(0, 0, 0, 0.5); */
+  margin-bottom: 28px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: box-shadow 0.15s ease-out;
+}
+
+.back-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(160deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0.06) 35%,
+      transparent 55%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+}
+
+.back-link svg {
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .back-link:hover {
-  opacity: 1;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.22),
+    0 6px 28px rgba(0, 0, 0, 0.55);
 }
 
 
@@ -364,11 +398,10 @@ h2 {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  transition: transform 0.18s ease-out, opacity 0.18s ease-out;
+  transition: opacity 0.18s ease-out;
 }
 
 .project-card:hover {
-  transform: scale(1.06);
   opacity: 1;
 }
 
@@ -490,4 +523,86 @@ h2 {
   to {
     opacity: 1;
   }
+}
+
+/* ============================================================
+   Custom Cursor — Liquid Glass
+   ============================================================ */
+
+.cursor-active,
+.cursor-active * {
+  cursor: none !important;
+}
+
+.cursor-blob {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.cursor-blob.is-visible {
+  opacity: 1;
+}
+
+/* Liquid Glass blob — the material */
+.cursor-blob {
+  width: 20px;
+  height: 20px;
+
+  /* Glass material: gradient catches light from top-left */
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(255, 255, 255, 0.06) 60%,
+      rgba(255, 255, 255, 0.12) 100%);
+
+  /* Frosted glass refraction */
+  backdrop-filter: blur(3px) saturate(1.6);
+  -webkit-backdrop-filter: blur(3px) saturate(1.6);
+
+  /* Glass edge — thin specular rim */
+  border: 0.5px solid rgba(255, 255, 255, 0.32);
+
+  /* Depth: inner highlight at top, soft outer shadow */
+  box-shadow:
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.55),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.08),
+    0 6px 24px rgba(0, 0, 0, 0.18),
+    0 2px 6px rgba(0, 0, 0, 0.1);
+
+  transition:
+    background 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+    border-color 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+    box-shadow 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+    opacity 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Merged — cursor dissolves into back button */
+.cursor-blob.is-merged {
+  opacity: 0 !important;
+  transition:
+    opacity 0.2s cubic-bezier(0.25, 0.1, 0.25, 1),
+    background 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+    border-color 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+    box-shadow 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Hover — glass brightens, glow deepens */
+.cursor-blob.is-hovering {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0.08) 60%,
+      rgba(255, 255, 255, 0.16) 100%);
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.65),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.06),
+    0 8px 32px rgba(0, 0, 0, 0.22),
+    0 3px 10px rgba(0, 0, 0, 0.12),
+    0 0 0 0.5px rgba(255, 255, 255, 0.12);
 }
