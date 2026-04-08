@@ -27,8 +27,12 @@
   const MAG_STRENGTH = 0.38;
   const MAG_LERP = 0.10;
 
-  const magTargets = [...document.querySelectorAll(".back-link, .project-icon, .project-folder-icon")]
-    .map(el => ({ el, x: 0, y: 0, scale: 1 }));
+  const magTargets = [
+    ...[...document.querySelectorAll(".back-link, .project-icon, .project-folder-icon")]
+      .map(el => ({ el, x: 0, y: 0, scale: 1, rotated: false })),
+    ...[...document.querySelectorAll(".nav-link")]
+      .map(el => ({ el, x: 0, y: 0, scale: 1, rotated: true })),
+  ];
 
   // ── Physics constants ─────────────────────────────────────
   // Heavy: low spring = lots of lag, low damping = carries momentum
@@ -145,8 +149,11 @@
       let tX = 0, tY = 0, tS = 1;
       if (dist < MAG_RADIUS) {
         const p = 1 - dist / MAG_RADIUS;
-        tX = dx * p * MAG_STRENGTH;
-        tY = dy * p * MAG_STRENGTH;
+        // Nav links live inside a rotate(-90deg) parent, so local axes are
+        // swapped: local X = screen up, local Y = screen right.
+        // Convert screen-space pull (dx, dy) to local coords: (-dy, dx).
+        tX = (t.rotated ? -dy : dx) * p * MAG_STRENGTH;
+        tY = (t.rotated ?  dx : dy) * p * MAG_STRENGTH;
         tS = 1 + p * 0.10;
       }
 

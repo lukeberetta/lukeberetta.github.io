@@ -146,23 +146,15 @@ h2 {
   position: relative;
 }
 
-.app-aside ul li::before {
-  z-index: -1;
-  content: "";
-  width: 100%;
-  height: 1px;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.2s ease-out;
-  position: absolute;
-  bottom: -1px;
-  left: 0;
+.nav-link {
+  display: inline-block;
+  transition: opacity 0.2s ease;
 }
 
-.app-aside ul li:hover::before {
-  transform: scaleX(1);
-  transform-origin: left;
+.nav-link:hover {
+  opacity: 0.5;
 }
+
 
 @media (max-width: 451px) {
   .app-aside {
@@ -407,6 +399,16 @@ h2 {
 
 .project-card--folder {
   gap: 4px;
+}
+
+.project-icon,
+.project-folder-icon {
+  transition: opacity 0.2s ease;
+}
+
+.project-icon:hover,
+.project-folder-icon:hover {
+  opacity: 0.7;
 }
 
 .project-icon {
