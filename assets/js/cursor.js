@@ -94,6 +94,20 @@
     rafId = requestAnimationFrame(tick);
     if (!isVisible) return;
 
+    // ── READ PHASE (all DOM reads before any writes) ───────
+    // Read magnetic target rects now, before any transform writes.
+    // CSS transforms don't affect layout, so these reads won't
+    // trigger a forced reflow as long as we haven't written
+    // layout-affecting properties. We subtract the current
+    // translation offset because getBoundingClientRect reflects
+    // the element's current visual (post-transform) position.
+    for (const t of magTargets) {
+      const rect = t.el.getBoundingClientRect();
+      t.cx = rect.left + rect.width  / 2 - t.x;
+      t.cy = rect.top  + rect.height / 2 - t.y;
+    }
+
+    // ── COMPUTE PHASE ─────────────────────────────────────
     // Spring physics
     vx += (mx - bx) * SPRING;
     vy += (my - by) * SPRING;
@@ -122,16 +136,11 @@
     // Click compress
     if (isPressed) { sx *= 0.92; sy *= 0.92; }
 
-    blob.style.transform = `translate(${bx}px, ${by}px) rotate(${angle}rad) scale(${sx}, ${sy})`;
-
-    // Magnetic pull
+    // Magnetic pull calculations
     for (const t of magTargets) {
-      const rect  = t.el.getBoundingClientRect();
-      const natCx = rect.left + rect.width  / 2 - t.x;
-      const natCy = rect.top  + rect.height / 2 - t.y;
-      const dx    = mx - natCx;
-      const dy    = my - natCy;
-      const dist  = Math.sqrt(dx * dx + dy * dy);
+      const dx   = mx - t.cx;
+      const dy   = my - t.cy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
 
       let tX = 0, tY = 0, tS = 1;
       if (dist < MAG_RADIUS) {
@@ -141,10 +150,15 @@
         tS = 1 + p * 0.10;
       }
 
-      t.x     += (tX    - t.x)     * MAG_LERP;
-      t.y     += (tY    - t.y)     * MAG_LERP;
-      t.scale += (tS    - t.scale) * MAG_LERP;
+      t.x     += (tX - t.x)     * MAG_LERP;
+      t.y     += (tY - t.y)     * MAG_LERP;
+      t.scale += (tS - t.scale) * MAG_LERP;
+    }
 
+    // ── WRITE PHASE (all DOM writes at end) ───────────────
+    blob.style.transform = `translate(${bx}px, ${by}px) rotate(${angle}rad) scale(${sx}, ${sy})`;
+
+    for (const t of magTargets) {
       t.el.style.transform = `translate(${t.x}px, ${t.y}px) scale(${t.scale})`;
     }
   };
