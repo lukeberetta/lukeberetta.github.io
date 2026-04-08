@@ -157,6 +157,7 @@
 
     // ── WRITE PHASE (all DOM writes at end) ───────────────
     blob.style.transform = `translate(${bx}px, ${by}px) rotate(${angle}rad) scale(${sx * 0.5}, ${sy * 0.5})`;
+    blob.style.setProperty("--counter-angle", `${-angle}rad`);
 
     for (const t of magTargets) {
       t.el.style.transform = `translate(${t.x}px, ${t.y}px) scale(${t.scale})`;
