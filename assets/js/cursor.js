@@ -8,36 +8,36 @@
   document.body.classList.add("cursor-active");
 
   blob.style.marginLeft = "-20px";
-  blob.style.marginTop  = "-20px";
+  blob.style.marginTop = "-20px";
 
   // ── State ─────────────────────────────────────────────────
   let mx = -100, my = -100;
   let bx = -100, by = -100;
-  let vx = 0,    vy = 0;
+  let vx = 0, vy = 0;
 
-  let isVisible  = false;
+  let isVisible = false;
   let isHovering = false;
-  let isPressed  = false;
-  let rafId      = null;
+  let isPressed = false;
+  let rafId = null;
 
   let hoverLerp = 0;
 
   // ── Magnetic elements ─────────────────────────────────────
-  const MAG_RADIUS   = 60;
+  const MAG_RADIUS = 60;
   const MAG_STRENGTH = 0.38;
-  const MAG_LERP     = 0.10;
+  const MAG_LERP = 0.10;
 
   const magTargets = [...document.querySelectorAll(".back-link, .project-icon, .project-folder-icon")]
     .map(el => ({ el, x: 0, y: 0, scale: 1 }));
 
   // ── Physics constants ─────────────────────────────────────
   // Heavy: low spring = lots of lag, low damping = carries momentum
-  const SPRING           = 0.10;
-  const DAMPING          = 0.72;
-  const MAX_SPEED        = 18;
-  const MAX_STRETCH      = 1.45;
-  const HOVER_SCALE      = 2.6;
-  const HOVER_LERP_SPEED = 0.09;
+  const SPRING = 0.10;
+  const DAMPING = 0.65;
+  const MAX_SPEED = 18;
+  const MAX_STRETCH = 2;
+  const HOVER_SCALE = 2;
+  const HOVER_LERP_SPEED = 0.07;
 
   // ── Mouse tracking ────────────────────────────────────────
   document.addEventListener("mousemove", (e) => {
@@ -86,8 +86,8 @@
   });
 
   // ── Click feedback ────────────────────────────────────────
-  document.addEventListener("mousedown", () => { isPressed = true;  });
-  document.addEventListener("mouseup",   () => { isPressed = false; });
+  document.addEventListener("mousedown", () => { isPressed = true; });
+  document.addEventListener("mouseup", () => { isPressed = false; });
 
   // ── rAF loop ──────────────────────────────────────────────
   const tick = () => {
@@ -103,8 +103,8 @@
     // the element's current visual (post-transform) position.
     for (const t of magTargets) {
       const rect = t.el.getBoundingClientRect();
-      t.cx = rect.left + rect.width  / 2 - t.x;
-      t.cy = rect.top  + rect.height / 2 - t.y;
+      t.cx = rect.left + rect.width / 2 - t.x;
+      t.cy = rect.top + rect.height / 2 - t.y;
     }
 
     // ── COMPUTE PHASE ─────────────────────────────────────
@@ -121,9 +121,9 @@
     hoverLerp += (hoverTarget - hoverLerp) * HOVER_LERP_SPEED;
 
     // Stretch (fades out as hover state grows)
-    const speed       = Math.sqrt(vx * vx + vy * vy);
-    const normalised  = Math.min(speed / MAX_SPEED, 1);
-    const stretchAmt  = 1 - hoverLerp;
+    const speed = Math.sqrt(vx * vx + vy * vy);
+    const normalised = Math.min(speed / MAX_SPEED, 1);
+    const stretchAmt = 1 - hoverLerp;
     let sx = 1 + normalised * (MAX_STRETCH - 1) * stretchAmt;
     let sy = 1 / sx * stretchAmt + 1 * (1 - stretchAmt);
     const angle = speed > 0.5 && stretchAmt > 0.05 ? Math.atan2(vy, vx) : 0;
@@ -138,8 +138,8 @@
 
     // Magnetic pull calculations
     for (const t of magTargets) {
-      const dx   = mx - t.cx;
-      const dy   = my - t.cy;
+      const dx = mx - t.cx;
+      const dy = my - t.cy;
       const dist = Math.sqrt(dx * dx + dy * dy);
 
       let tX = 0, tY = 0, tS = 1;
@@ -150,8 +150,8 @@
         tS = 1 + p * 0.10;
       }
 
-      t.x     += (tX - t.x)     * MAG_LERP;
-      t.y     += (tY - t.y)     * MAG_LERP;
+      t.x += (tX - t.x) * MAG_LERP;
+      t.y += (tY - t.y) * MAG_LERP;
       t.scale += (tS - t.scale) * MAG_LERP;
     }
 
