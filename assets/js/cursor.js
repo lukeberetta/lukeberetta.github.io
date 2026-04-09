@@ -93,6 +93,16 @@
   document.addEventListener("mousedown", () => { isPressed = true; });
   document.addEventListener("mouseup", () => { isPressed = false; });
 
+  // ── Click ripple ──────────────────────────────────────────
+  document.addEventListener("click", (e) => {
+    const ripple = document.createElement("div");
+    ripple.className = "cursor-ripple";
+    ripple.style.left = e.clientX + "px";
+    ripple.style.top  = e.clientY + "px";
+    document.body.appendChild(ripple);
+    ripple.addEventListener("animationend", () => ripple.remove(), { once: true });
+  });
+
   // ── rAF loop ──────────────────────────────────────────────
   const tick = () => {
     rafId = requestAnimationFrame(tick);
