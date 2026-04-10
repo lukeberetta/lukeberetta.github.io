@@ -9,6 +9,39 @@
 
 
 /* ============================================================
+   Grid Overlay — 8px pixel grid
+   ============================================================ */
+
+#grid-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    repeating-linear-gradient(to right,
+      rgba(255, 255, 255, 0.025) 0px,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px,
+      transparent 24px),
+    repeating-linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.025) 0px,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px,
+      transparent 24px),
+    repeating-linear-gradient(to right,
+      rgba(255, 255, 255, 0.025) 0px,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px,
+      transparent 8px),
+    repeating-linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.025) 0px,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px,
+      transparent 8px);
+}
+
+
+/* ============================================================
    Reset
    ============================================================ */
 
@@ -108,17 +141,17 @@ h2 {
    ============================================================ */
 
 .app-header {
-  top: 150px;
-  left: 65px;
+  top: 144px;
+  left: 72px;
   transform: rotate(-90deg);
   transform-origin: bottom left;
 }
 
 @media (max-width: 451px) {
   .app-header {
-    top: 160px;
+    top: 144px;
     left: auto;
-    right: 28px;
+    right: 24px;
     transform: rotate(90deg);
     transform-origin: top right;
   }
@@ -130,8 +163,8 @@ h2 {
    ============================================================ */
 
 .app-aside {
-  left: 65px;
-  bottom: 60px;
+  left: 72px;
+  bottom: 48px;
   transform: rotate(-90deg);
   transform-origin: bottom left;
 }
@@ -139,7 +172,7 @@ h2 {
 .app-aside ul {
   display: flex;
   list-style: none;
-  gap: 30px;
+  gap: 24px;
 }
 
 .app-aside ul li {
@@ -159,8 +192,8 @@ h2 {
 @media (max-width: 451px) {
   .app-aside {
     left: auto;
-    right: 28px;
-    bottom: 30px;
+    right: 24px;
+    bottom: 24px;
     transform: rotate(90deg);
     transform-origin: top right;
   }
@@ -192,7 +225,7 @@ h2 {
 
 @media (max-width: 451px) {
   .app-main {
-    padding: 60px 68px 60px 24px;
+    padding: 48px 72px 48px 24px;
   }
 }
 
@@ -200,7 +233,7 @@ h2 {
 .app-main .main-section {
   position: relative;
   padding-bottom: 120px;
-  max-width: 620px;
+  max-width: 624px;
 }
 
 .app-main .main-intro:last-of-type,
@@ -212,13 +245,13 @@ h2 {
 
   .app-main .main-intro,
   .app-main .main-section {
-    padding-bottom: 60px;
+    padding-bottom: 48px;
   }
 }
 
 .app-main span {
   display: block;
-  padding-bottom: 30px;
+  padding-bottom: 24px;
 }
 
 .app-main h2 {
@@ -242,7 +275,7 @@ h2 {
   max-width: none;
   list-style: none;
   line-height: 124%;
-  padding-bottom: 20px;
+  padding-bottom: 24px;
 }
 
 .app-main li small,
@@ -270,8 +303,8 @@ h2 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px) saturate(160%);
@@ -279,7 +312,7 @@ h2 {
   /* box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.14),
     0 4px 20px rgba(0, 0, 0, 0.5); */
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   text-decoration: none;
   overflow: hidden;
   transition: box-shadow 0.15s ease-out;
@@ -323,11 +356,11 @@ h2 {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px) saturate(160%);
   -webkit-backdrop-filter: blur(12px) saturate(160%);
-  border-radius: 10px;
+  border-radius: 8px;
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.14),
     0 4px 20px rgba(0, 0, 0, 0.5);
-  margin: 32px 0;
+  margin: 24px 0;
 }
 
 .img-placeholder.img-full {
@@ -343,11 +376,11 @@ h2 {
 
 @media (max-width: 451px) {
   .img-placeholder.img-full {
-    width: calc(100vw - 92px);
+    width: calc(100vw - 96px);
   }
 
   .main-section .img-placeholder:last-child {
-    margin-top: 60px;
+    margin-top: 48px;
   }
 }
 
@@ -372,15 +405,15 @@ h2 {
 .projects {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 28px 24px;
-  max-width: 560px;
+  gap: 24px 24px;
+  max-width: 552px;
 }
 
 @media (max-width: 451px) {
   .projects {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px 12px;
+    gap: 16px 16px;
     max-width: 100%;
   }
 }
@@ -398,7 +431,7 @@ h2 {
 }
 
 .project-card--folder {
-  gap: 4px;
+  gap: 8px;
 }
 
 .project-icon,
@@ -415,7 +448,7 @@ h2 {
   position: relative;
   width: 120px;
   height: 120px;
-  border-radius: 27px;
+  border-radius: 24px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px) saturate(160%);
@@ -442,9 +475,9 @@ h2 {
 
 @media (max-width: 451px) {
   .project-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 18px;
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
   }
 }
 
@@ -465,14 +498,16 @@ h2 {
 .project-folder-icon {
   width: 120px;
   height: 120px;
+  border-radius: 24px;
   object-fit: contain;
   display: block;
 }
 
 @media (max-width: 451px) {
   .project-folder-icon {
-    width: 80px;
-    height: 80px;
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
   }
 }
 
@@ -630,6 +665,13 @@ h2 {
 }
 
 @keyframes cursor-ripple-expand {
-  0%   { transform: scale(1);   opacity: 0.7; }
-  100% { transform: scale(3.5); opacity: 0;   }
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: scale(3.5);
+    opacity: 0;
+  }
 }
