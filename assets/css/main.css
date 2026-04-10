@@ -5,6 +5,7 @@
 :root {
   --colour-light: #fff;
   --colour-dark: #181818;
+  --colour-accent: #FF6200;
 }
 
 
@@ -91,6 +92,11 @@ body {
 
 a {
   text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--colour-accent);
 }
 
 
@@ -181,11 +187,11 @@ h2 {
 
 .nav-link {
   display: inline-block;
-  transition: opacity 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .nav-link:hover {
-  opacity: 0.5;
+  color: var(--colour-accent);
 }
 
 
