@@ -5,13 +5,16 @@
 :root {
   --colour-light: #fff;
   --colour-dark: #181818;
-  /* --colour-accent: #0066CC; */
+  --colour-accent: #0066CC;
+  --colour-accent: #0C8CE9;
   --colour-accent: #DAE300;
+  --colour-accent: #a0a0a0;
+
 }
 
 
 /* ============================================================
-   Grid Overlay — 8px pixel grid
+   Grid Overlay — 8px pixel grid (base, super faint)
    ============================================================ */
 
 #grid-overlay {
@@ -21,25 +24,64 @@
   z-index: 0;
   background-image:
     repeating-linear-gradient(to right,
-      rgba(255, 255, 255, 0.02) 0px,
-      rgba(255, 255, 255, 0.02) 1px,
+      rgba(255, 255, 255, 0.015) 0px,
+      rgba(255, 255, 255, 0.015) 1px,
       transparent 1px,
       transparent 24px),
     repeating-linear-gradient(to bottom,
-      rgba(255, 255, 255, 0.02) 0px,
-      rgba(255, 255, 255, 0.02) 1px,
+      rgba(255, 255, 255, 0.015) 0px,
+      rgba(255, 255, 255, 0.015) 1px,
       transparent 1px,
       transparent 24px),
     repeating-linear-gradient(to right,
-      rgba(255, 255, 255, 0.02) 0px,
-      rgba(255, 255, 255, 0.02) 1px,
+      rgba(255, 255, 255, 0.006) 0px,
+      rgba(255, 255, 255, 0.006) 1px,
       transparent 1px,
       transparent 8px),
     repeating-linear-gradient(to bottom,
-      rgba(255, 255, 255, 0.02) 0px,
-      rgba(255, 255, 255, 0.02) 1px,
+      rgba(255, 255, 255, 0.006) 0px,
+      rgba(255, 255, 255, 0.006) 1px,
       transparent 1px,
       transparent 8px);
+}
+
+
+/* ============================================================
+   Grid Overlay — cursor glow reveal
+   ============================================================ */
+
+#grid-overlay-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    repeating-linear-gradient(to right,
+      color-mix(in srgb, var(--colour-accent) 10%, transparent) 0px,
+      color-mix(in srgb, var(--colour-accent) 10%, transparent) 1px,
+      transparent 1px,
+      transparent 24px),
+    repeating-linear-gradient(to bottom,
+      color-mix(in srgb, var(--colour-accent) 10%, transparent) 0px,
+      color-mix(in srgb, var(--colour-accent) 10%, transparent) 1px,
+      transparent 1px,
+      transparent 24px),
+    repeating-linear-gradient(to right,
+      color-mix(in srgb, var(--colour-accent) 4%, transparent) 0px,
+      color-mix(in srgb, var(--colour-accent) 4%, transparent) 1px,
+      transparent 1px,
+      transparent 8px),
+    repeating-linear-gradient(to bottom,
+      color-mix(in srgb, var(--colour-accent) 4%, transparent) 0px,
+      color-mix(in srgb, var(--colour-accent) 4%, transparent) 1px,
+      transparent 1px,
+      transparent 8px);
+  mask-image: radial-gradient(circle 200px at var(--cx, -999px) var(--cy, -999px),
+      black 0%,
+      transparent 100%);
+  -webkit-mask-image: radial-gradient(circle 200px at var(--cx, -999px) var(--cy, -999px),
+      black 0%,
+      transparent 100%);
 }
 
 

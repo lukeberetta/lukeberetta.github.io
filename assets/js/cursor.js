@@ -43,6 +43,9 @@
   const HOVER_SCALE = 2;
   const HOVER_LERP_SPEED = 0.12;
 
+  // ── Grid glow ─────────────────────────────────────────────
+  const gridGlow = document.getElementById("grid-overlay-glow");
+
   // ── Mouse tracking ────────────────────────────────────────
   document.addEventListener("mousemove", (e) => {
     mx = e.clientX;
@@ -51,6 +54,10 @@
       bx = mx; by = my;
       isVisible = true;
       blob.classList.add("is-visible");
+    }
+    if (gridGlow) {
+      gridGlow.style.setProperty("--cx", e.clientX + "px");
+      gridGlow.style.setProperty("--cy", e.clientY + "px");
     }
   });
 
