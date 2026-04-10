@@ -21,22 +21,21 @@
   let rafId = null;
 
   let hoverLerp = 0;
-  let prevMx = -100, prevMy = -100;
 
   // ── Magnetic elements ─────────────────────────────────────
   const MAG_RADIUS = 60;
-  const MAG_RADIUS_SQ = MAG_RADIUS * MAG_RADIUS;
   const MAG_STRENGTH = 0.38;
   const MAG_LERP = 0.10;
 
   const magTargets = [
     ...[...document.querySelectorAll(".back-link, .project-icon, .project-folder-icon")]
-      .map(el => ({ el, x: 0, y: 0, cx: 0, cy: 0, scale: 1, rotated: false })),
+      .map(el => ({ el, x: 0, y: 0, scale: 1, rotated: false })),
     ...[...document.querySelectorAll(".nav-link")]
-      .map(el => ({ el, x: 0, y: 0, cx: 0, cy: 0, scale: 1, rotated: true })),
+      .map(el => ({ el, x: 0, y: 0, scale: 1, rotated: true })),
   ];
 
   // ── Physics constants ─────────────────────────────────────
+  // Apple feel: snappy follow, fast settle, subtle stretch
   const SPRING = 0.16;
   const DAMPING = 0.65;
   const MAX_SPEED = 20;
@@ -47,22 +46,6 @@
   // ── Grid glow ─────────────────────────────────────────────
   const gridGlow = document.getElementById("grid-overlay-glow");
 
-  // ── Cache magnetic target positions ───────────────────────
-  // getBoundingClientRect is called once here and on scroll/resize,
-  // not on every rAF tick. We subtract the current translation offset
-  // because getBoundingClientRect reflects the post-transform position.
-  function cachePositions() {
-    for (const t of magTargets) {
-      const rect = t.el.getBoundingClientRect();
-      t.cx = rect.left + rect.width / 2 - t.x;
-      t.cy = rect.top + rect.height / 2 - t.y;
-    }
-  }
-  cachePositions();
-  window.addEventListener("load", cachePositions);
-  window.addEventListener("scroll", cachePositions, { passive: true });
-  window.addEventListener("resize", cachePositions, { passive: true });
-
   // ── Mouse tracking ────────────────────────────────────────
   document.addEventListener("mousemove", (e) => {
     mx = e.clientX;
@@ -71,6 +54,10 @@
       bx = mx; by = my;
       isVisible = true;
       blob.classList.add("is-visible");
+    }
+    if (gridGlow) {
+      gridGlow.style.setProperty("--cx", e.clientX + "px");
+      gridGlow.style.setProperty("--cy", e.clientY + "px");
     }
   });
 
@@ -128,17 +115,18 @@
     rafId = requestAnimationFrame(tick);
     if (!isVisible) return;
 
-    // ── Settled check ─────────────────────────────────────
-    // Skip all computation and DOM writes when nothing is changing.
-    const moved = mx !== prevMx || my !== prevMy;
-    prevMx = mx; prevMy = my;
-
-    const hoverTarget = isHovering ? 1 : 0;
-    const vSettled = Math.abs(vx) < 0.01 && Math.abs(vy) < 0.01;
-    const hSettled = Math.abs(hoverTarget - hoverLerp) < 0.005;
-    const mSettled = magTargets.every(t => Math.abs(t.x) < 0.05 && Math.abs(t.y) < 0.05);
-
-    if (!moved && vSettled && hSettled && mSettled) return;
+    // ── READ PHASE (all DOM reads before any writes) ───────
+    // Read magnetic target rects now, before any transform writes.
+    // CSS transforms don't affect layout, so these reads won't
+    // trigger a forced reflow as long as we haven't written
+    // layout-affecting properties. We subtract the current
+    // translation offset because getBoundingClientRect reflects
+    // the element's current visual (post-transform) position.
+    for (const t of magTargets) {
+      const rect = t.el.getBoundingClientRect();
+      t.cx = rect.left + rect.width / 2 - t.x;
+      t.cy = rect.top + rect.height / 2 - t.y;
+    }
 
     // ── COMPUTE PHASE ─────────────────────────────────────
     // Spring physics
@@ -150,6 +138,7 @@
     by += vy;
 
     // Hover lerp
+    const hoverTarget = isHovering ? 1 : 0;
     hoverLerp += (hoverTarget - hoverLerp) * HOVER_LERP_SPEED;
 
     // Stretch (fades out as hover state grows)
@@ -168,18 +157,18 @@
     // Click compress
     if (isPressed) { sx *= 0.92; sy *= 0.92; }
 
-    // Magnetic pull — squared distance avoids Math.sqrt unless cursor is in range
+    // Magnetic pull calculations
     for (const t of magTargets) {
       const dx = mx - t.cx;
       const dy = my - t.cy;
-      const distSq = dx * dx + dy * dy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
 
       let tX = 0, tY = 0, tS = 1;
-      if (distSq < MAG_RADIUS_SQ) {
-        const dist = Math.sqrt(distSq);
+      if (dist < MAG_RADIUS) {
         const p = 1 - dist / MAG_RADIUS;
         // Nav links live inside a rotate(-90deg) parent, so local axes are
         // swapped: local X = screen up, local Y = screen right.
+        // Convert screen-space pull (dx, dy) to local coords: (-dy, dx).
         tX = (t.rotated ? -dy : dx) * p * MAG_STRENGTH;
         tY = (t.rotated ? dx : dy) * p * MAG_STRENGTH;
         tS = 1 + p * 0.10;
@@ -195,13 +184,6 @@
 
     for (const t of magTargets) {
       t.el.style.transform = `translate(${t.x}px, ${t.y}px) scale(${t.scale})`;
-    }
-
-    // Grid glow updated here, throttled to display refresh rate,
-    // rather than firing on every mousemove event.
-    if (gridGlow) {
-      gridGlow.style.setProperty("--cx", mx + "px");
-      gridGlow.style.setProperty("--cy", my + "px");
     }
   };
 
