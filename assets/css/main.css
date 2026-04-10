@@ -376,6 +376,11 @@ h2 {
   object-fit: cover;
 }
 
+video.img-placeholder {
+  aspect-ratio: auto;
+  height: auto;
+}
+
 .main-section .img-placeholder:last-child {
   margin-top: 120px;
   margin-bottom: 0;
