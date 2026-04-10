@@ -35,13 +35,13 @@
   ];
 
   // ── Physics constants ─────────────────────────────────────
-  // Heavy: low spring = lots of lag, low damping = carries momentum
-  const SPRING = 0.10;
+  // Apple feel: snappy follow, fast settle, subtle stretch
+  const SPRING = 0.16;
   const DAMPING = 0.65;
-  const MAX_SPEED = 18;
-  const MAX_STRETCH = 2;
+  const MAX_SPEED = 20;
+  const MAX_STRETCH = 1.2;
   const HOVER_SCALE = 2;
-  const HOVER_LERP_SPEED = 0.07;
+  const HOVER_LERP_SPEED = 0.12;
 
   // ── Mouse tracking ────────────────────────────────────────
   document.addEventListener("mousemove", (e) => {
@@ -98,7 +98,7 @@
     const ripple = document.createElement("div");
     ripple.className = "cursor-ripple";
     ripple.style.left = e.clientX + "px";
-    ripple.style.top  = e.clientY + "px";
+    ripple.style.top = e.clientY + "px";
     document.body.appendChild(ripple);
     ripple.addEventListener("animationend", () => ripple.remove(), { once: true });
   });
@@ -163,7 +163,7 @@
         // swapped: local X = screen up, local Y = screen right.
         // Convert screen-space pull (dx, dy) to local coords: (-dy, dx).
         tX = (t.rotated ? -dy : dx) * p * MAG_STRENGTH;
-        tY = (t.rotated ?  dx : dy) * p * MAG_STRENGTH;
+        tY = (t.rotated ? dx : dy) * p * MAG_STRENGTH;
         tS = 1 + p * 0.10;
       }
 
