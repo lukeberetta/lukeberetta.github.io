@@ -1,11 +1,6 @@
 (function () {
   if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
 
-  // Skip custom cursor on low-end hardware to avoid jank.
-  // hardwareConcurrency is universal; deviceMemory is Chrome/Edge only (falls back to 4).
-  // ≤2 cores or <1 GB RAM → system cursor.
-  if ((navigator.hardwareConcurrency ?? 4) <= 2 || (navigator.deviceMemory ?? 4) < 1) return;
-
   // ── DOM setup ─────────────────────────────────────────────
   const blob = document.createElement("div");
   blob.className = "cursor-blob";
@@ -186,7 +181,6 @@
 
     // ── WRITE PHASE (all DOM writes at end) ───────────────
     blob.style.transform = `translate(${bx}px, ${by}px) rotate(${angle}rad) scale(${sx * 0.5}, ${sy * 0.5})`;
-    blob.style.setProperty("--counter-angle", `${-angle}rad`);
 
     for (const t of magTargets) {
       t.el.style.transform = `translate(${t.x}px, ${t.y}px) scale(${t.scale})`;
