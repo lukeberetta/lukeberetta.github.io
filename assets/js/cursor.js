@@ -59,6 +59,7 @@
     }
   }
   cachePositions();
+  window.addEventListener("load", cachePositions);
   window.addEventListener("scroll", cachePositions, { passive: true });
   window.addEventListener("resize", cachePositions, { passive: true });
 
